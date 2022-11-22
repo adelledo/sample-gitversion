@@ -1,21 +1,24 @@
-next-version: 1.0
-assembly-versioning-scheme: MajorMinorPatch
-assembly-file-versioning-scheme: MajorMinorPatch
-assembly-informational-format: '{InformationalVersion}'
 mode: Mainline
-increment: Inherit
-continuous-delivery-fallback-tag: ci
-tag-prefix: '[vV]'
-major-version-bump-message: '\+semver:\s?(breaking|major)'
-minor-version-bump-message: '\+semver:\s?(feature|minor)'
-patch-version-bump-message: '\+semver:\s?(fix|patch)'
-no-bump-message: '\+semver:\s?(none|skip)'
-legacy-semver-padding: 4
-build-metadata-padding: 4
-commits-since-version-source-padding: 4
-tag-pre-release-weight: 60000
-commit-message-incrementing: Enabled
-ignore:
-  sha: []
-merge-message-formats: {}
-update-build-number: true
+merge-message-formats:
+  ghmerge: ^Merge pull request \#(?<PullRequestNumber>\d+) from AngelaE\/(?<SourceBranch>.+)
+branches:
+  master:
+    regex: (^main$)
+    tag: ""
+    increment: Patch
+    is-release-branch: true
+  feature:
+    regex: ^feature?[/-]
+    tag: useBranchName
+    increment: Minor
+  bugfix:
+    regex: ^bugfix[/-]
+    tag: useBranchName
+    increment: Patch
+    source-branches: ["main"]
+  chore:
+    regex: ^chore[/-]
+    tag: useBranchName
+    increment: None
+    prevent-increment-of-merged-branch-version: true
+    source-branches: ["main"]
