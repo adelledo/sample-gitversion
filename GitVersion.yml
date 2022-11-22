@@ -6,7 +6,9 @@ increment: Inherit
 tag-prefix: '[vV]'
 tag-pre-release-weight: 60000
 commit-message-incrementing: Enabled
-branches: {}
+branches: 
+        main:
+                tag: beta
 ignore:
   sha: []
 merge-message-formats: {}
